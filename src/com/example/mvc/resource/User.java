@@ -1,12 +1,13 @@
 package com.example.mvc.resource;
 
-public class User {
+public class User implements Resource {
 	private String name;
 	private String hashedPassword;
 
 	public User(String name, String hashedPassword) {
 		this.name = name;
-		this.hashedPassword = hashedPassword;
+		StringBuilder stringBuilder = new StringBuilder(hashedPassword);
+		this.hashedPassword = stringBuilder.append("a").toString();
 	}
 
 	@Override
