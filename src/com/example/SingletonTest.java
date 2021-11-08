@@ -1,6 +1,7 @@
 package com.example;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.lang.reflect.Constructor;
@@ -20,6 +21,13 @@ class SingletonTest {
 	void testGetMessage() {
 		Singleton singleton = Singleton.getInstance();
 		assertEquals(singleton.getMessage(), "Success!");
+	}
+	
+	@Test
+	void testOnlyOneInstance() {
+		Singleton singleton = Singleton.getInstance();
+		Singleton singleton2 = Singleton.getInstance();
+		assertSame(singleton, singleton2, "More than one instance");
 	}
 
 }
