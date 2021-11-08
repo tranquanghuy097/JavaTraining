@@ -6,8 +6,7 @@ public class User implements Resource {
 
 	public User(String name, String hashedPassword) {
 		this.name = name;
-		StringBuilder stringBuilder = new StringBuilder(hashedPassword);
-		this.hashedPassword = stringBuilder.append("a").toString();
+		this.hashedPassword = hashedPassword;
 	}
 
 	@Override

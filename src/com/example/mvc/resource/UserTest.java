@@ -15,10 +15,8 @@ class UserTest {
 	
 	@Test
 	void testPassword() {
-		String password = "John";
-		User user = new User("asd", password);
-		StringBuilder stringBuilder = new StringBuilder(password);
-		String hashedPassword = stringBuilder.append("a").toString();
+		String hashedPassword = "John";
+		User user = new User("asd", hashedPassword);
 		assertEquals(user.getHashedPassword(), hashedPassword, "Inccorect hashed password");
 	}
 	
