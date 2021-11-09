@@ -21,13 +21,25 @@ public class UserModel implements Model {
 		return userModel;
 	}
 	
-	public void addUser(User user) {
-		userList.add(user);
+	@Override
+	public boolean add(Resource resource) {
+		try {
+			User user = (User) resource;
+			userList.add(user);
+		} catch (Exception e) {
+			return false;
+		} 
+		return true;
 	}
 	
 	@Override
 	public boolean ifExists(Resource resource) {
 		User user = (User) resource;
 		return userList.contains(user);
+	}
+	
+	@Override
+	public void reset() {
+		userModel = null;
 	}
 }

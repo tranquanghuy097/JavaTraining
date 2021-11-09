@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import com.example.mvc.model.UserModel;
@@ -17,7 +19,8 @@ class ControllerTest {
 	static List<User> userList = new ArrayList<User>();
 	static UserController controller;
 	
-	static {
+	@BeforeAll
+	static void setUp() {
 		userList.add(new User("Huy", "asde"));
 		userList.add(new User("Jack", "zxc"));
 		userList.add(new User("Jill", "sad"));
@@ -32,7 +35,7 @@ class ControllerTest {
 	static UserModel mockUpDatabase() {
 		UserModel mockUp = UserModel.getInstance();
 		userList.forEach((user) -> {
-			mockUp.addUser(user);
+			mockUp.add(user);
 		});
 		return mockUp;
 	}
@@ -45,6 +48,19 @@ class ControllerTest {
 	@Test
 	void testLogInFailure() {
 		assertEquals(controller.logIn(new User("kameas", "Asdasd")), "Failure");
+	}
+	
+	@Test
+	void testSignUpSuccess() {
+		assertEquals(controller.logIn(userList.get(1)), "Success");
+	}
+	
+	@AfterAll
+	static void tearDown() {
+		model = null;
+		view = null;
+		userList = null;
+		controller = null;
 	}
 
 }

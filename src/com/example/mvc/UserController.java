@@ -19,4 +19,9 @@ public class UserController implements Controller {
 		String message = model.ifExists(user) == true? view.getSuccessMessage() : view.getFailureMessage();
 		return message;
 	}
+	
+	public String signUp(User user) {
+		String message = model.add(user) == true? view.getSuccessMessage() : view.getFailureMessage();
+		return message;
+	}
 }

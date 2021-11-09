@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Modifier;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import com.example.mvc.resource.User;
@@ -16,6 +17,12 @@ class UserModelTest {
 		Constructor<UserModel> constructor = UserModel.class.getDeclaredConstructor();
 		assertTrue(Modifier.isPrivate(constructor.getModifiers()), "Constructor is not private");
 	}
+	
+	@BeforeEach 
+    void reset() {
+        UserModel userModel = UserModel.getInstance();
+        userModel.reset();
+    }
 	
 	@Test
 	void testOnlyOneInstance() {
@@ -31,12 +38,19 @@ class UserModelTest {
 		assertFalse(userModel.ifExists(user), "Fail to check for empty list");
 	}
 	
+	@Test
+	void testAddUser() {
+		UserModel userModel = createModel();
+		User user = new User("Jack", "jill");
+		assertTrue(userModel.add(user), "Fail to add user");
+	}
+	
 	UserModel createModel() {
 		UserModel userModel = UserModel.getInstance();
-		userModel.addUser(new User("Jack", "jill"));
-		userModel.addUser(new User("Mark", "asd"));
-		userModel.addUser(new User("Dean", "eqw"));
-		userModel.addUser(new User("Cam", "xas"));
+		userModel.add(new User("Jack", "jill"));
+		userModel.add(new User("Mark", "asd"));
+		userModel.add(new User("Dean", "eqw"));
+		userModel.add(new User("Cam", "xas"));
 		return userModel;
 	}
 	
